@@ -225,7 +225,7 @@ function uninstall {
 }
 
 function java_macos_integration_remove {
-    if [ "$(get_asdf_config_value "java_macos_integration_in_home")" = "yes" ]; then
+    if [ "$(get_asdf_config_value "java_macos_integration_user_home")" = "yes" ]; then
         rm -rf "$HOME/Library/Java/JavaVirtualMachines/${ASDF_INSTALL_VERSION}"
     else
         printf "Removing the integration with /usr/libexec/java_home needs root permission to delete the folder at /Library/Java/JavaVirtualMachines/%s\n" "${ASDF_INSTALL_VERSION}"
@@ -236,7 +236,7 @@ function java_macos_integration_remove {
 function java_macos_integration_install {
     local macOS_files_path
     macOS_files_path="$1"
-    if [ "$(get_asdf_config_value "java_macos_integration_in_home")" = "yes" ]; then
+    if [ "$(get_asdf_config_value "java_macos_integration_user_home")" = "yes" ]; then
         mkdir -p "$HOME/Library/Java/JavaVirtualMachines/${ASDF_INSTALL_VERSION}/Contents"
         cp -R "${macOS_files_path}/Contents/MacOS" "$HOME/Library/Java/JavaVirtualMachines/${ASDF_INSTALL_VERSION}/Contents/"
         cp -R "${macOS_files_path}/Contents/Info.plist" "$HOME/Library/Java/JavaVirtualMachines/${ASDF_INSTALL_VERSION}/Contents/"
